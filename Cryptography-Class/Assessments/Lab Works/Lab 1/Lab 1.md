@@ -43,7 +43,8 @@ nmap -sV -p21,23,22,80 <target-ip>
 - user
 - test
 - ftpuser
-![edit text](vimusers.jpg)
+  
+![users](vimusers.jpg)
 
 ---
 
