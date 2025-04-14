@@ -14,4 +14,4 @@ This repository includes:
 
 
 🧪 **Lab Work**  
-- [Lab 1: Cryptographic Attacks](./Assessments/Lab%20Works/Lab%201/)  
+- [Lab 1: Cryptographic Attacks](./Cryptography-Class/Assessments/Lab%20Works/Lab%201/Lab%201.md)  
