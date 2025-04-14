@@ -36,10 +36,7 @@ enum4linux -a <target-ip>
 ```bash
 nmap -sV -p21,23,22,80 <target-ip>
 ```
-
-```bash
-nxc <target-ip> --enum
-```
+![nmap scan port to attack](nmapscan.jpg)](nmapscan.jpg)
 
 **Discovered usernames**:
 - admin
