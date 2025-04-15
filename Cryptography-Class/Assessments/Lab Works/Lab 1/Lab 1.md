@@ -39,13 +39,18 @@ nmap -sV -p21,23,22,80 <target-ip>
 ![nmap scan port to attack](nmapscan.jpg)
 
 **Discovered usernames**:
-- admin
-- user
-- test
-- ftpuser
+-nobody 
+-user
+-root
+-daemon
+-sshd
+-man
+-msfadmin
+-ftp
+-telnetd
+
   
 ![users](vimusers.jpg)
-
 ![(usersinvimpng)](usersinvim.png)
 ---
 
