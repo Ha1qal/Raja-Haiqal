@@ -45,7 +45,7 @@ nmap -sV -p21,23,22,80 <target-ip>
 - ftpuser
   
 ![users](vimusers.jpg)
-
+![!\[usersinvim\](usersinvimpng)](usersinvim.png)
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
