@@ -39,19 +39,20 @@ nmap -sV -p21,23,22,80 <target-ip>
 ![nmap scan port to attack](nmapscan.jpg)
 
 **Discovered usernames**:
--nobody 
--user
--root
--daemon
--sshd
--man
--msfadmin
--ftp
--telnetd
-
+- admin
+- nobody
+- user
+- root
+- daemon
+- sshd
+- man
+- msfadmin
+- ftp
+- telnetd
   
 ![users](vimusers.jpg)
-![(usersinvimpng)](usersinvim.png)
+
+![alt text](Cryptography-Class\Assessments\Lab Works\Lab 1\userinvim.png)
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
