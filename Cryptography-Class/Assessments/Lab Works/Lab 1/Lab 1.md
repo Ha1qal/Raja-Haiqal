@@ -137,6 +137,8 @@ for http it is also in plaintext mostly because its not https.
 ![httpresponse](image.png)
 this result shows that the user successfully login to the HTTP so it indicate that the user and pass that we got above are correct!
 
+---
+
 **🧩 Analysis**:
  Protocol | Observation                 |
 |----------|-----------------------------|
