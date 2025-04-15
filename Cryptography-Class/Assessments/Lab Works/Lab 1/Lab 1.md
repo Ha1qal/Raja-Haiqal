@@ -39,20 +39,20 @@ nmap -sV -p21,23,22,80 <target-ip>
 ![nmap scan port to attack](nmapscan.jpg)
 
 **Discovered usernames**:
-- admin
-- nobody
-- user
 - root
-- daemon
-- sshd
-- man
 - msfadmin
-- ftp
+- admin
+- user
+- service
 - telnetd
-  
+- ftp
+- mysql
+- postgres
+- tomcat55
+- www-data
 ![users](vimusers.jpg)
 
-(![userinvim](userinvim.png))
+![userinvim](userinvim.png)
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
@@ -65,14 +65,14 @@ nmap -sV -p21,23,22,80 <target-ip>
 ```bash
 hydra -L users.txt -P /usr/share/wordlists/simplepass.txt -t 4 ftp:ftp://<target-ip> -o resultftp.txt
 ```
-![ftp result and command](ftpcommandandresults.jpg)
+![ftpresult](ftpresult.png)
 
 **TELNET**
 
 ```bash
 hydra -L users.txt -P passwords.txt telnet://<target-ip>
 ```
-
+![telnetresult](telnetresult.png)
 
 **SSH**
 
@@ -80,8 +80,8 @@ hydra -L users.txt -P passwords.txt telnet://<target-ip>
 hydra -l root -P rockyou.txt ssh://<target-ip>
 ```
 
-![ssh command](sshcommand.jpg)
-![ssh result](sshresults.jpg)
+![sshresult](sshresult.png)
+
 ---
 
 #### 2.2 HTTP (Web Login Brute Force)  
@@ -100,11 +100,23 @@ hydra -l root -P rockyou.txt ssh://<target-ip>
 **Tool used**: `Wireshark` / `tcpdump`  
 **Steps**:
 1. Log in to FTP, Telnet, SSH, and HTTP using recovered credentials.
-2. Capture traffic during login and interaction.
+
+![ftploginwirehark](ftploginwirehark.png)
+
+![sshloginwireshark](sshloginwireshark.png)
+
+![telnetlogin](telnetwiresharklogin.png)
+
+1. Capture traffic during login and interaction.
 
 ```bash
 tcpdump -i eth0 -w capture.pcap
 ```
+![ftpinwirehark](ftpresultinwireshark.png)
+
+![telnetresultinwireshark](telnetresultinwireshark.png)
+
+![sshresultinwireshark](sshresultinwireshark.png)
 
 **🧩 Analysis**:
 | Protocol | Observation                        |
@@ -144,7 +156,7 @@ tcpdump -i eth0 -w capture.pcap
 ### 📝 6. Walkthrough Summary
 
 **Tools Used**:  
-Hydra, Medusa, Burp Suite, Wireshark, NetExec, nmap, tcpdump
+Hydra,Burp Suite, Wireshark,  nmap, tcpdump
 
 **Key Commands**:
 
@@ -156,27 +168,5 @@ hydra -l admin -P rockyou.txt ftp://<ip>
 medusa -h <ip> -u admin -P rockyou.txt -M telnet
 ```
 
-📸 Screenshots Included:
-- Enumeration results  
-- Brute force success (each protocol)  
-- Wireshark traffic  
-- BurpSuite config & success  
-- Mitigation diagram _(optional)_
 
----
-
-## 📁 C. Deliverables
-
-- ✅ Walkthrough Markdown File  
-- ✅ Screenshots (PNG/JPG)  
-- ✅ GitHub Repo Link: _[Insert Your Repo Link Here]_
-
----
-
-## 🎤 D. Demo and Debrief Checklist
-
-- ✅ Introduce tools & setup  
-- ✅ Show enumeration → brute force → successful login  
-- ✅ Open Wireshark and show sniffed credentials (FTP/Telnet)  
-- ✅ Discuss protocol weaknesses  
-- ✅ Propose improvements  
+    

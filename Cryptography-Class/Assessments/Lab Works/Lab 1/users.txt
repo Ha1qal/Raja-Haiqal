@@ -1,0 +1,11 @@
+root
+msfadmin
+admin
+user
+service
+telnetd
+ftp
+mysql
+postgres
+tomcat55
+www-data
