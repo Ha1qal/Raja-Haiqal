@@ -135,7 +135,7 @@ ssh result is encrpyted!
 for http it is also in plaintext mostly because its not https.
 
 ![httpresponse](httpresponse.png)
-this result shows that the user successfully login to the HTTP so it indicate that the user and pass that we got above are correct!
+The result shows that the user successfully logged into the HTTP service, which confirms that the username and password obtained during the brute force attack are valid.
 
 ---
 
