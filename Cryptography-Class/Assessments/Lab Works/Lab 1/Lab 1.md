@@ -97,11 +97,13 @@ Steps:
 4. Imported wordlists (`simplepass.txt`).
 
 ![setuphttp](setupbrutefrocehttp.png)
-#setup out foxy proxy in extension and then intercept it in our burpsuite when we type in the username and pass in the website.
+setup out foxy proxy in extension and then intercept it in our burpsuite when we type in the username and pass in the website.
+
 ![senttointruder](sendtointruder.png)
-#sent the GET request URL into our intruder for bruteforce attack.
+sent the GET request URL into our intruder for bruteforce attack.
+
 ![settingtheattack](settingtheattack.png)
-#simply select username field input 'a' 
+simply select username field input 'a' and also the password field 'a' and import our simplepass.txt and user.txt,but to cut time we can also enter our own list in the field and then press 'add' to add in the list field.
 ---
 
 ### 🧪 3. Sniff Network Traffic
@@ -120,14 +122,16 @@ Steps:
 tcpdump -i eth0 -w capture.pcap
 ```
 ![ftpinwirehark](ftpresultinwireshark.png)
-#right click on ftp protocol and follow tcp stream
-#ftp sniff output in plaintext
+
+right click on ftp protocol and follow tcp stream
+ftp sniff output in plaintext
 
 ![telnetresultinwireshark](telnetresultinwireshark.png)
-#telnet sniff output in plaintext too
+
+telnet sniff output in plaintext too
 
 ![sshresultinwireshark](sshresultinwireshark.png)
-#ssh result is encrpyted!
+ssh result is encrpyted!
 
 **🧩 Analysis**:
  Protocol | Observation                 |
