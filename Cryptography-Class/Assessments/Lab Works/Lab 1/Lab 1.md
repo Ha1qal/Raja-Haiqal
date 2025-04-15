@@ -46,7 +46,7 @@ nmap -sV -p21,23,22,80 <target-ip>
   
 ![users](vimusers.jpg)
 
-![!\[usersinvim\](usersinvimpng)](usersinvim.png)
+![(usersinvimpng)](usersinvim.png)
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
