@@ -30,8 +30,8 @@ To exploit the vulnerabilities of common network protocols—**FTP**, **TELNET**
 ```bash
 enum4linux -a <target-ip>
 ```
-(![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](enumcommand.jpg))
-(![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](enum.jpg))
+![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](enumcommand.jpg)
+![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](enum.jpg)
 
 ```bash
 nmap -sV -p21,23,22,80 <target-ip>
