@@ -57,19 +57,16 @@ nmap -sV -p21,23,22,80 <target-ip>
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
-
 #### 2.1 FTP, TELNET, SSH  
 **Tools used**: `Hydra`
 
 **FTP**
-
 ```bash
 hydra -L users.txt -P simplepass.txt -t 4 ftp:ftp://<target-ip> 
 ```
 ![ftpresult](ftpresult.png)
 
 **TELNET**
-
 ```bash
 hydra -L users.txt -P simplepass.txt telnet://<target-ip>
 ```
@@ -77,7 +74,6 @@ hydra -L users.txt -P simplepass.txt telnet://<target-ip>
 ![telnetresult](telnetresult.png)
 
 **SSH**
-
 ```bash
 hydra -l users.txt -P simplepass.txt ssh://<target-ip>
 ```
@@ -87,7 +83,6 @@ hydra -l users.txt -P simplepass.txt ssh://<target-ip>
 ---
 
 #### 🌐 HTTP (Web Login Brute Force)
-
 **Tool Used**: Burp Suite (Intruder)
 
 Steps:
@@ -107,10 +102,10 @@ sent the GET request URL into our intruder for bruteforce attack.
 ![settingtheattack](settingtheattack.png)
 
 simply select username field input 'a' and also the password field 'a' and import our simplepass.txt and user.txt,but to cut time we can also enter our own list in the field and then press 'add' to add in the list field.
+
 ---
 
 ### 🧪 3. Sniff Network Traffic
-
 **Tool used**: `Wireshark` / `tcpdump`  
 **Steps**:
 1. Log in to FTP, Telnet, SSH, and HTTP using recovered credentials.
