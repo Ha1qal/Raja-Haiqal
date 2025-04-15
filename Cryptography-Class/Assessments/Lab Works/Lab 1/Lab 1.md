@@ -97,12 +97,15 @@ Steps:
 4. Imported wordlists (`simplepass.txt`).
 
 ![setuphttp](setupbrutefrocehttp.png)
+
 setup out foxy proxy in extension and then intercept it in our burpsuite when we type in the username and pass in the website.
 
 ![senttointruder](sendtointruder.png)
+
 sent the GET request URL into our intruder for bruteforce attack.
 
 ![settingtheattack](settingtheattack.png)
+
 simply select username field input 'a' and also the password field 'a' and import our simplepass.txt and user.txt,but to cut time we can also enter our own list in the field and then press 'add' to add in the list field.
 ---
 
@@ -149,7 +152,7 @@ ssh result is encrpyted!
 | FTP      | Login delay after failures       | Used `-t 4` to reduce thread count      |
 | TELNET   | Session timeout                  | Added timeout with `-T 10`              |
 | HTTP     | Rate limiting after 10 attempts  | Added delay in Burp Intruder payloads   |
-| SSH      | Account lockout after 5 attempts | Switched to `medusa` for slower attack  |
+| SSH      | Account lockout after 5 attempts | Used slower brute-force speed in Hydra (`-t 1`) to avoid lockout |
 
 ---
 
@@ -187,6 +190,10 @@ hydra -l user.txt -P simplepass.txt telnet://<ip>
 ```bash
 hydra -l user.txt -P simplepass.txt ssh://<ip>
 ```
+```bash
+tcpdump -i eth0 -w capture.pcap
+```
+
 **Skills Practiced**:
 - Brute force on multiple protocols  
 - Packet sniffing and protocol analysis  
