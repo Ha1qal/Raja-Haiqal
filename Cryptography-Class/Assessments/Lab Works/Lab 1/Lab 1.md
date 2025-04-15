@@ -50,6 +50,7 @@ nmap -sV -p21,23,22,80 <target-ip>
 - postgres
 - tomcat55
 - www-data
+  
 ![users](vimusers.jpg)
 
 ![userinvim](userinvim.png)
@@ -169,4 +170,3 @@ medusa -h <ip> -u admin -P rockyou.txt -M telnet
 ```
 
 
-    
