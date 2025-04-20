@@ -135,7 +135,7 @@ ssh result is encrpyted!
 ![httpwireshark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/httpwirehark.png)
 for http it is also in plaintext mostly because its not https.
 
-![httpresponse](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/httpresponse.png)
+![httpresponse](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/httpresponse.png)
 
 The result shows that the user successfully logged into the HTTP service, which confirms that the username and password obtained during the brute force attack are valid.
 
