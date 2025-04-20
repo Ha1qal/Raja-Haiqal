@@ -53,7 +53,7 @@ nmap -sV -p21,23,22,80 <target-ip>
   
 ![users](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/vimusers.jpg)
 
-![userinvim](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/userinvim.png)
+![userinvim](/Cryptography-Class/Assessments/Lab%20Works/userinvim.png)
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
