@@ -51,9 +51,9 @@ nmap -sV -p21,23,22,80 <target-ip>
 - tomcat55
 - www-data
   
-![users](vimusers.jpg)
+![users](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/vimusers.jpg)
 
-![userinvim](userinvim.png)
+![userinvim](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/userinvim.png)
 ---
 
 ### 🔓 2. Perform Brute Force Attacks
@@ -64,21 +64,21 @@ nmap -sV -p21,23,22,80 <target-ip>
 ```bash
 hydra -L users.txt -P simplepass.txt -t 4 ftp:ftp://<target-ip> 
 ```
-![ftpresult](ftpresult.png)
+![ftpresult](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/ftpresult.png)
 
 **TELNET**
 ```bash
 hydra -L users.txt -P simplepass.txt telnet://<target-ip>
 ```
 
-![telnetresult](telnetresult.png)
+![telnetresult](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/telnetresult.png)
 
 **SSH**
 ```bash
 hydra -l users.txt -P simplepass.txt ssh://<target-ip>
 ```
 
-![sshresult](sshresult.png)
+![sshresult](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/sshresult.png)
 
 ---
 
@@ -91,15 +91,15 @@ Steps:
 3. Set payload positions for username and password.
 4. Imported wordlists (`simplepass.txt`).
 
-![setuphttp](setupbrutefrocehttp.png)
+![setuphttp](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/setupbrutefrocehttp.png)
 
 setup out foxy proxy in extension and then intercept it in our burpsuite when we type in the username and pass in the website.
 
-![senttointruder](sendtointruder.png)
+![senttointruder](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/sendtointruder.png)
 
 sent the GET request URL into our intruder for bruteforce attack.
 
-![settingtheattack](settingtheattack.png)
+![settingtheattack](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/settingtheattack.png)
 
 simply select username field input 'a' and also the password field 'a' and import our simplepass.txt and user.txt,but to cut time we can also enter our own list in the field and then press 'add' to add in the list field.
 
@@ -110,31 +110,31 @@ simply select username field input 'a' and also the password field 'a' and impor
 **Steps**:
 1. Log in to FTP, Telnet, SSH, and HTTP using recovered credentials.
 
-![ftploginwirehark](ftploginwirehark.png)
+![ftploginwirehark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/ftploginwirehark.png)
 
-![sshloginwireshark](sshloginwireshark.png)
+![sshloginwireshark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/sshloginwireshark.png)
 
-![telnetlogin](telnetwiresharklogin.png)
+![telnetlogin](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/telnetwiresharklogin.png)
 
 ```bash
 tcpdump -i eth0 -w capture.pcap
 ```
-![ftpinwirehark](ftpresultinwireshark.png)
+![ftpinwirehark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/ftpresultinwireshark.png)
 
 right click on ftp protocol and follow tcp stream
 ftp sniff output in plaintext
 
-![telnetresultinwireshark](telnetresultinwireshark.png)
+![telnetresultinwireshark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/telnetresultinwireshark.png)
 
 telnet sniff output in plaintext too
 
-![sshresultinwireshark](sshresultinwireshark.png)
+![sshresultinwireshark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/sshresultinwireshark.png)
 ssh result is encrpyted!
 
-![httpwireshark](httpwirehark.png)
+![httpwireshark](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/httpwirehark.png)
 for http it is also in plaintext mostly because its not https.
 
-![httpresponse](httpresponse.png)
+![httpresponse](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/httpresponse.png)
 
 The result shows that the user successfully logged into the HTTP service, which confirms that the username and password obtained during the brute force attack are valid.
 
