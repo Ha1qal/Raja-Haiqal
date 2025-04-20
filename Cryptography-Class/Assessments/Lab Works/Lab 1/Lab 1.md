@@ -30,13 +30,13 @@ This lab demonstrates the exploitation of insecure network protocols through:
 ```bash
 enum4linux -a <target-ip>
 ```
-![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](enumcommand.jpg)
-![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](enum.jpg)
+![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/enumcommand.jpg)
+![Cryptography-Class\Assessments\Lab Works\Lab 1\enum.jpg](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/enum.jpg)
 
 ```bash
 nmap -sV -p21,23,22,80 <target-ip>
 ```
-![nmap scan port to attack](nmapscan.jpg)
+![nmap scan port to attack](/Cryptography-Class/Assessments/Lab%20Works/Lab%201/screenshots/nmapscan.jpg)
 
 **Discovered usernames**:
 - root
