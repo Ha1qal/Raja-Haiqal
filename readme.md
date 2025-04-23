@@ -14,4 +14,5 @@ This repository includes:
 
 
 🧪 **Lab Work**  
-- [Lab 1: Cryptographic Attacks](./Cryptography-Class/Assessments/Lab%20Works/Lab%201/Lab%201.md)  
+- [Lab 1: Brute Force and Traffic Analysis on Network Protocols](./Cryptography-Class/Assessments/Lab%20Works/Lab%201/Lab%201.md)  
+- [Lab 2: Cracking Weak Password Hashes and Exploiting Poor Authentication in Databases](<Cryptography-Class/Assessments/Lab Works/Lab 2/Lab 2.md>)
