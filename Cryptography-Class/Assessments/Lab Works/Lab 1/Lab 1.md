@@ -22,6 +22,10 @@ This lab demonstrates the exploitation of insecure network protocols through:
 
 ## ⚙️ B. Lab Tasks
 
+### IP ADDRESS
+- **192.168.106.130**(Attacker Machine)
+- **192.168.106.138**(Victim Machine)
+
 ### 🔎 1. Enumerate the Vulnerable VM to Discover Usernames
 
 **Tool used**: `enum4linux`, `nmap`, 
