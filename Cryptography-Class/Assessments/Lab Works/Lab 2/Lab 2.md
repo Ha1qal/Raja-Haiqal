@@ -164,3 +164,17 @@ Captured raw data during database login. Password hashes and queries visible in 
 
 ---
 
+## ✅ Conclusion
+
+This lab demonstrated real-world cryptographic vulnerabilities that still exist in poorly configured systems. Weak authentication, outdated hashing, and unencrypted transmissions can all be exploited easily by attackers.
+
+Securing such systems involves:
+- Enforcing authentication best practices,
+- Adopting strong, salted password hashing,
+- Ensuring secure encrypted communication channels.
+
+**Always audit legacy systems for these cryptographic flaws.** 🔐
+
+---
+
+🧠 *"Attack like a black hat. Defend like a white hat."* – Haiqal
