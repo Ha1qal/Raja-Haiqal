@@ -20,6 +20,7 @@
 
 ## 🛠️ Tools Used
 
+- `Kali Linux` (OS)
 - `nmap` (Service enumeration)  
 - `mysql-client` (Database access)  
 - `hashid` / `hash-identifier` (Hash detection)  
@@ -81,6 +82,13 @@ mysql -h 192.168.106.138 -u root --password="" --ssl=0
 ```sql
 USE dvwa;
 SHOW TABLES;
++----------------+
+| Tables_in_dvwa |
++----------------+
+| guestbook      |
+| users          |
++----------------+
+
 SELECT * FROM users;
 ```
 
@@ -103,10 +111,10 @@ echo "5f4dcc3b5aa765d61d8327deb882cf99" > hash.txt
 
 ### 3. 🔍 Password Hash Discovery & Identification
 
-Used `hashid` and `hash-identifier`:
+Used `hash-identifier`:
 
 ```bash
-hashid hash.txt
+hash-identifier 5f4dcc3b5aa765d61d8327deb882cf99
 ```
 
 - Detected as **MD5** hash.
