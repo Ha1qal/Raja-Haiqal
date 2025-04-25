@@ -132,6 +132,13 @@ hash-identifier 5f4dcc3b5aa765d61d8327deb882cf99
 Used **hashcat** to brute-force the MD5 hash:
 
 ```bash
+hashcat -m 0 -a 0 hash.txt /usr/share/wordlists/rockyou.txt
+```
+>- m 0 = specify the md5 hash
+>- a 0 = using dictionary attack
+>- /rockyou.txt = path to word list.
+
+```bash
 hashcat -m 0 hash.txt --show > cracked_results.txt
 ```
 
