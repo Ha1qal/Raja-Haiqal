@@ -21,33 +21,55 @@ This lab introduces OpenSSL and related tools for fundamental cryptographic oper
 
 ### Tools Used
 - `OpenSSL`
+- `Kali Linux`
+- `Google Drive`
 
 ### Commands Executed
 
+Danish generate a strong random key
 ```bash
-~/Lab3
+openssl rand -hex 32 > key.bin
+```
+Danish create a plaintext message
+```bash
+echo "Hello, this is a secret message from Danish." > message.txt
+```
+Danish encrypt using AES-256-CBC
+```bash
+openssl enc -aes-256-cbc -salt -in message.txt -out encrypted_message.bin -pass file:./key.bin
+```
+> - `enc` : Encryption utility
+
+> - `aes-256-cbc` : Specifies AES with 256-bit key in CBC mode
+
+> - `salt` : Adds salt to prevent dictionary attacks
+
+> - `pass file` : ./key.bin: Reads key from file
+
+Then i retrieve the files using google drive and try to decode with the key given by Danish.
+```bash
 ❯ ls
 encrypted_message.bin  key.bin
 
-~/Lab3
 ❯ cat encrypted_message.bin
 Salted__�����aZ���Qg`���|�իs��X���׎�pF1�Ը��)bp��1Z}O �;�x��o��-�h�%                                   
 
-~/Lab3
 ❯ cat key.bin
 fe754682297e0ae3f81b8db5c9526c3ca9b4e97e831faf29cf6705079b0a7763
 
-~/Lab3
 ❯ openssl enc -aes-256-cbc -d -in encrypted_message.bin -out mesejrahsia.txt -pass file:$PWD/key.bin
 *** WARNING : deprecated key derivation used.
 Using -iter or -pbkdf2 would be better.
 
-~/Lab3
 ❯ cat mesejrahsia.txt
 Hello Raja, this is a secret message from Danish.
 ```
+<details>
+<summary>Screenshot</summary>
+<br>
 
 ![task1](screenshots/task1.png)
+</details>
 
 ### Analysis of Results
 The `diff` command returns no output, indicating both files are identical. This demonstrates successful symmetric encryption and decryption using AES-256-CBC.
@@ -66,12 +88,30 @@ openssl genpkey -algorithm RSA -out raja_private.pem -pkeyopt rsa_keygen_bits:20
 
 openssl rsa -pubout -in raja_private.pem -out raja_public.pem
 ```
-![keycreated](screenshots/createkey.png)
+<details>
+<summary>Screenshot</summary>
+<br>
 
+![keycreated](screenshots/createkey.png)
+</details>
+
+Danish create secret message
+```bash
+echo "This is a private message for Danish from Raja." > rahsia.txt
+```
+Danish encrypt with my public key
+```bash
+openssl rsautl -encrypt -inkey danish_public.pem -pubin -in rahsia.txt -out encrypted.bin
+```
+i try to decrypt the key using my private key
 ```bash
 openssl rsautl -decrypt -inkey raja_private.pem -in rahsia.enc -out rahsia_decrypted.txt
 ```
+<details>
+<summary>Screenshot</summary>
+<br>
 ![decryptrsaclear](screenshots/decryptrsa.png)
+</details>
 
 ### Analysis of Results
 Decrypted file matched original. RSA encryption using public key and decryption using private key ensures secure transmission. Minimum 2048-bit key ensures modern cryptographic strength.
@@ -86,23 +126,46 @@ Decrypted file matched original. RSA encryption using public key and decryption 
 
 ### Commands Executed
 
+Danish create a file:
 ```bash
-~/Lab3/task-3
+echo "This is an important document from Danish to Raja." > integrity.txt
+```
+Danish hash it
+```bash
+openssl dgst -sha256 integrity.txt
+```
+Output:
+> SHA2-256(integrity.txt)= `8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66e3855d07f`
+
+I try to verify the file and then edit the file.Aftefwards i try to verify the file back if the file have the saem hash.
+```bash
 ❯ cat integrity.txt
 This is an important document from Danish to Raja.
 
-~/Lab3/task-3
 ❯ openssl dgst -sha256 integrity.txt
 SHA2-256(integrity.txt)= 8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66e3855d07f
 
-~/Lab3/task-3
 ❯ echo " " >> integrity.txt
 
-~/Lab3/task-3
 ❯ openssl dgst -sha256 integrity.txt
 SHA2-256(integrity.txt)= e16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700
 ```
+<details>
+<summary>Screenshot</summary>
+<br>
+
 ![sha256compare](screenshots/sha256.png)
+</details>
+
+Danish hash the original file with the modified file by Raja
+```bash
+openssl dgst -sha256 integrity.txt integrity1.txt
+```
+Output:
+> SHA2-256(integrity.txt)= `8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66e3855d07f`
+
+> SHA2-256(integrity1.txt)= `e9fec22e3b60289908f0a7785b0356ab3263806df1593be1b2adc85c5d505abd`
+
 
 ### Analysis of Results
 Even a minor change produced a completely different hash. This demonstrates hash functions' sensitivity to input and supports integrity verification.
@@ -121,16 +184,49 @@ Even a minor change produced a completely different hash. This demonstrates hash
 echo "This is the signed agreement." > agreement.txt
 
 # Step 2: Sign with RSA private key (SHA-256)
-openssl dgst -sha256 -sign labi_private.pem -out agreement.sig agreement.txt
+openssl dgst -sha256 -sign raja_private.pem -out agreement.sig agreement.txt
+
+> `dgst` : -sha256: Hashing before signing
+
+> `sign` : Signs using the private key
+
+> `agreement.sig` : Signature output
 
 # Step 3: Verify signature with public key
-openssl dgst -sha256 -verify labi_public.pem -signature agreement.sig agreement.txt
+openssl dgst -sha256 -verify raja_public.pem -signature agreement.sig agreement.txt
 
-# Step 4: Modify file and test verification
-echo "Altered." >> agreement.txt
-openssl dgst -sha256 -verify labi_public.pem -signature agreement.sig agreement.txt
-```
+<details>
+<summary>Screenshot</summary>
+<br>
+
 ![digitalsignature](screenshots/digitalsignature.png)
+</details>
+
+Raja share the agreement and signature with Danish and Danish verifies using Raja’s public key
+
+```bash
+openssl dgst -sha256 -verify raja_public.pem -signature agreement.sig agreement.txt
+```
+
+Output:
+```mathematica
+Verified OK
+```
+
+---
+
+1. Danish modify the agreement and he verify again
+```bash
+echo " Altered." >> agreement.txt
+```
+```bash
+openssl dgst -sha256 -verify raja_public.pem -signature agreement.sig agreement.txt
+```
+Output:
+```mathematica
+Verification Failure
+```
+
 
 ### Analysis of Results
 Signature verification failed after modifying the file, proving that digital signatures preserve both authenticity and integrity.
