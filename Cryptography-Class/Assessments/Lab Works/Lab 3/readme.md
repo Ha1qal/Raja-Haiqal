@@ -102,6 +102,7 @@ SHA2-256(integrity.txt)= 8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66
 ❯ openssl dgst -sha256 integrity.txt
 SHA2-256(integrity.txt)= e16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700
 ```
+![hashcompare256](screenshots/hash256.png)
 
 ### Analysis of Results
 Even a minor change produced a completely different hash. This demonstrates hash functions' sensitivity to input and supports integrity verification.
