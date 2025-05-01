@@ -25,21 +25,29 @@ This lab introduces OpenSSL and related tools for fundamental cryptographic oper
 ### Commands Executed
 
 ```bash
-# Step 1: Generate a 256-bit (32-byte) random key
-openssl rand -hex 32 > aes.key
+~/Lab3
+❯ ls
+encrypted_message.bin  key.bin
 
-# Step 2: Save a message
-echo "Confidential message from Labu to Labi." > haiqal.txt
+~/Lab3
+❯ cat encrypted_message.bin
+Salted__�����aZ���Qg`���|�իs��X���׎�pF1�Ը��)bp��1Z}O �;�x��o��-�h�%                                   
 
-# Step 3: Encrypt the file using AES-256-CBC
-openssl enc -aes-256-cbc -salt -in haiqal.txt -out haiqal.enc -pass file:./aes.key
+~/Lab3
+❯ cat key.bin
+fe754682297e0ae3f81b8db5c9526c3ca9b4e97e831faf29cf6705079b0a7763
 
-# Step 4: Decrypt the file using the same key
-openssl enc -d -aes-256-cbc -in haiqal.enc -out haiqal_decrypted.txt -pass file:./aes.key
+~/Lab3
+❯ openssl enc -aes-256-cbc -d -in encrypted_message.bin -out mesejrahsia.txt -pass file:$PWD/key.bin
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
 
-# Step 5: Compare original and decrypted
-diff haiqal.txt haiqal_decrypted.txt
+~/Lab3
+❯ cat mesejrahsia.txt
+Hello Raja, this is a secret message from Danish.
 ```
+
+![task1decrypt](screenshots/decrypttask1.png)
 
 ### Analysis of Results
 The `diff` command returns no output, indicating both files are identical. This demonstrates successful symmetric encryption and decryption using AES-256-CBC.
@@ -54,24 +62,16 @@ The `diff` command returns no output, indicating both files are identical. This 
 ### Commands Executed
 
 ```bash
-# Step 1: Generate RSA private key (2048-bit)
-openssl genpkey -algorithm RSA -out labi_private.pem -pkeyopt rsa_keygen_bits:2048
+openssl genpkey -algorithm RSA -out raja_private.pem -pkeyopt rsa_keygen_bits:2048
 
-# Step 2: Extract public key
-openssl rsa -pubout -in labi_private.pem -out labi_public.pem
-
-# Step 3: Create secret message
-echo "RAHSIA: Labi must not leak this." > rahsia.txt
-
-# Step 4: Encrypt using public key
-openssl rsautl -encrypt -inkey labi_public.pem -pubin -in rahsia.txt -out rahsia.enc
-
-# Step 5: Decrypt using private key
-openssl rsautl -decrypt -inkey labi_private.pem -in rahsia.enc -out rahsia_decrypted.txt
-
-# Step 6: Compare files
-diff rahsia.txt rahsia_decrypted.txt
+openssl rsa -pubout -in raja_private.pem -out raja_public.pem
 ```
+![createkey](screenshots/createkeyrsa.png)
+
+```bash
+openssl rsautl -decrypt -inkey raja_private.pem -in rahsia.enc -out rahsia_decrypted.txt
+```
+![rsadecrypt](screenshots/rsadecrypt.png)
 
 ### Analysis of Results
 Decrypted file matched original. RSA encryption using public key and decryption using private key ensures secure transmission. Minimum 2048-bit key ensures modern cryptographic strength.
@@ -87,17 +87,20 @@ Decrypted file matched original. RSA encryption using public key and decryption 
 ### Commands Executed
 
 ```bash
-# Step 1: Create file
-echo "This is a hash test message." > haiqal.txt
+~/Lab3/task-3
+❯ cat integrity.txt
+This is an important document from Danish to Raja.
 
-# Step 2: Generate SHA-256 hash
-openssl dgst -sha256 haiqal.txt
+~/Lab3/task-3
+❯ openssl dgst -sha256 integrity.txt
+SHA2-256(integrity.txt)= 8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66e3855d07f
 
-# Step 3: Modify file slightly
-echo " " >> haiqal.txt
+~/Lab3/task-3
+❯ echo " " >> integrity.txt
 
-# Step 4: Generate new hash
-openssl dgst -sha256 haiqal.txt
+~/Lab3/task-3
+❯ openssl dgst -sha256 integrity.txt
+SHA2-256(integrity.txt)= e16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700
 ```
 
 ### Analysis of Results
