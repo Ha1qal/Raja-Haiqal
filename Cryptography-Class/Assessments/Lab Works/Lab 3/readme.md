@@ -47,7 +47,7 @@ Using -iter or -pbkdf2 would be better.
 Hello Raja, this is a secret message from Danish.
 ```
 
-![task1decrypt](screenshots/decrypttask1.png)
+![task1](screenshots/task1.png)
 
 ### Analysis of Results
 The `diff` command returns no output, indicating both files are identical. This demonstrates successful symmetric encryption and decryption using AES-256-CBC.
@@ -66,12 +66,12 @@ openssl genpkey -algorithm RSA -out raja_private.pem -pkeyopt rsa_keygen_bits:20
 
 openssl rsa -pubout -in raja_private.pem -out raja_public.pem
 ```
-![createkey](screenshots/createkeyrsa.png)
+![keycreated](screenshots/createkey.png)
 
 ```bash
 openssl rsautl -decrypt -inkey raja_private.pem -in rahsia.enc -out rahsia_decrypted.txt
 ```
-![rsadecrypt](screenshots/rsadecrypt.png)
+![decryptrsaclear](screenshots/decryptrsa.png)
 
 ### Analysis of Results
 Decrypted file matched original. RSA encryption using public key and decryption using private key ensures secure transmission. Minimum 2048-bit key ensures modern cryptographic strength.
@@ -102,7 +102,7 @@ SHA2-256(integrity.txt)= 8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66
 ❯ openssl dgst -sha256 integrity.txt
 SHA2-256(integrity.txt)= e16f1596201850fd4a63680b27f603cb64e67176159be3d8ed78a4403fdb1700
 ```
-![hashcompare256](screenshots/hash256.png)
+![sha256compare](screenshots/sha256.png)
 
 ### Analysis of Results
 Even a minor change produced a completely different hash. This demonstrates hash functions' sensitivity to input and supports integrity verification.
@@ -130,6 +130,7 @@ openssl dgst -sha256 -verify labi_public.pem -signature agreement.sig agreement.
 echo "Altered." >> agreement.txt
 openssl dgst -sha256 -verify labi_public.pem -signature agreement.sig agreement.txt
 ```
+![digitalsignature](screenshots/digitalsignature.png)
 
 ### Analysis of Results
 Signature verification failed after modifying the file, proving that digital signatures preserve both authenticity and integrity.
