@@ -106,7 +106,7 @@ Danish encrypt with my public key
 ```bash
 openssl rsautl -encrypt -inkey danish_public.pem -pubin -in rahsia.txt -out encrypted.bin
 ```
-See how danish encrypt with my public key[here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-2-asymmetric-encryption-and-decryption-using-rsa)
+See how danish encrypt with my public key [here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-2-asymmetric-encryption-and-decryption-using-rsa)
 
 i try to decrypt the key using my private key
 ```bash
@@ -200,14 +200,13 @@ openssl dgst -sha256 -sign raja_private.pem -out agreement.sig agreement.txt
 
 # Step 3: Verify signature with public key
 openssl dgst -sha256 -verify raja_public.pem -signature agreement.sig agreement.txt
-
+```
 <details>
 <summary>Screenshot</summary>
 <br>
 
 ![digitalsignature](screenshots/digitalsignature.png)
 </details>
-
 Raja share the agreement and signature with Danish and Danish verifies using Raja’s public key
 
 ```bash
@@ -233,7 +232,7 @@ Output:
 Verification Failure
 ```
 
-See Danish screenshots[here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-4-digital-signatures-using-rsa)
+See Danish screenshots [here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-4-digital-signatures-using-rsa)
 
 
 ### Analysis of Results
