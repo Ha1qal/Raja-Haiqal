@@ -75,7 +75,7 @@ Hello Raja, this is a secret message from Danish.
 </details>
 
 ### Analysis of Results
-The `diff` command returns no output, indicating both files are identical. This demonstrates successful symmetric encryption and decryption using AES-256-CBC.
+This demonstrates successful symmetric encryption and decryption using AES-256-CBC with a key.
 
 ---
 
