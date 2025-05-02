@@ -46,6 +46,9 @@ openssl enc -aes-256-cbc -salt -in message.txt -out encrypted_message.bin -pass 
 
 > - `pass file` : ./key.bin: Reads key from file
 
+
+See how Danish encrypt [here]([https://github.com/Ha1qal/Raja-Haiqal/blob/master/Cryptography-Class/Assessments/Lab%20Works/Lab%203/screenshots/rsadecrypt.png](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-1-symmetric-encryption-and-decryption-using-aes-256-cbc)).
+
 Then i retrieve the files using google drive and try to decode with the key given by Danish.
 ```bash
 ❯ ls
@@ -103,6 +106,8 @@ Danish encrypt with my public key
 ```bash
 openssl rsautl -encrypt -inkey danish_public.pem -pubin -in rahsia.txt -out encrypted.bin
 ```
+See how danish encrypt with my public key[here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-2-asymmetric-encryption-and-decryption-using-rsa)
+
 i try to decrypt the key using my private key
 ```bash
 openssl rsautl -decrypt -inkey raja_private.pem -in rahsia.enc -out rahsia_decrypted.txt
@@ -137,7 +142,7 @@ openssl dgst -sha256 integrity.txt
 Output:
 > SHA2-256(integrity.txt)= `8aca8c9981a01e58d9031e16f404248014d76daba78d3f89f709b66e3855d07f`
 
-I try to verify the file and then edit the file.Aftefwards i try to verify the file back if the file have the saem hash.
+I try to verify the file and then edit the file.Afterwards i try to verify the file again to see if the file have the same hash.
 ```bash
 ❯ cat integrity.txt
 This is an important document from Danish to Raja.
@@ -166,6 +171,7 @@ Output:
 
 > SHA2-256(integrity1.txt)= `e9fec22e3b60289908f0a7785b0356ab3263806df1593be1b2adc85c5d505abd`
 
+See how Danish done it and his Screenshots [here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-3-hashing-and-message-integrity-using-sha-256)
 
 ### Analysis of Results
 Even a minor change produced a completely different hash. This demonstrates hash functions' sensitivity to input and supports integrity verification.
@@ -178,7 +184,7 @@ Even a minor change produced a completely different hash. This demonstrates hash
 - `OpenSSL`
 
 ### Commands Executed
-
+I created the document and assign private and signature file.
 ```bash
 # Step 1: Create document
 echo "This is the signed agreement." > agreement.txt
@@ -226,6 +232,8 @@ Output:
 ```mathematica
 Verification Failure
 ```
+
+See Danish screenshots[here](https://github.com/nishsem/Danish/tree/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-3#task-4-digital-signatures-using-rsa)
 
 
 ### Analysis of Results
