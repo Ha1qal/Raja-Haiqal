@@ -35,24 +35,35 @@ You can see how Danish encrypt using aes-cbc in python code in his [github repo]
 
 I will be using this python code that i have created to decrypt Danish's message with the key and iv given.
 ```python
-from Crypto.Cipher import AES
-import base64
+from Crypto.Cipher import AES  # NOTE: Import AES cipher from pycryptodome
+import base64  # NOTE: Import base64 to decode the encoded key, IV, and ciphertext
 
 # 1. Paste your values here (from your encryption output)
+# NOTE: Decode the base64-encoded AES key
 key = base64.b64decode("tvPrWH2wVHEtBv4NmHNAoyrTKIdHcVGj5clf2V8TE8g=")
+
+# NOTE: Decode the base64-encoded Initialization Vector (IV)
 iv = base64.b64decode("PUgXpZIefjVR7BuwzsiSCg==")
+
+# NOTE: Decode the base64-encoded ciphertext
 ciphertext = base64.b64decode("l/+waUOVxpN0OqS5Mibim5mRmqb1Ez0zwsV2cmeZatOP2eYF2cQxMPG4By7LXBjU")
 
 # 2. Create cipher for decryption
+# NOTE: Create AES cipher object in CBC mode using the key and IV
 cipher = AES.new(key, AES.MODE_CBC, iv)
 
 # 3. Decrypt ciphertext
+# NOTE: Decrypt the ciphertext to get padded plaintext
 padded_plaintext = cipher.decrypt(ciphertext)
 
 # 4. Remove padding
+# NOTE: Get the value of the last byte to know how many padding bytes to remove
 pad_len = padded_plaintext[-1]
+
+# NOTE: Slice off the padding to get the original plaintext
 plaintext = padded_plaintext[:-pad_len]
 
+# NOTE: Decode bytes to string and print the result
 print("Decrypted:", plaintext.decode())
 ```
 the output:
@@ -87,7 +98,7 @@ private_key = key_pair.export_key()
 with open("raja_private.pem", "wb") as f:
     f.write(private_key)
 
-# 3. Export the public key (share this with you for encryption)
+# 3. Export the public key (share this with me for encryption)
 public_key = key_pair.publickey().export_key()
 with open("raja_public.pem", "wb") as f:
     f.write(public_key)
@@ -100,48 +111,31 @@ See Danish's [Github repo](https://github.com/nishsem/Danish/blob/main/Cryptogra
 
 then i try to decrypt the message given by Danish using my private key.
 ```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
-import base64
+from Crypto.PublicKey import RSA  # Import the RSA module to handle RSA keys
+from Crypto.Cipher import PKCS1_OAEP  # Import the cipher method for RSA decryption
+import base64  # Import base64 to decode the encoded ciphertext
 
 # 1. Load private key
+# NOTE: The RSA private key is stored as a multi-line string in PEM format
 private_key_str = '''-----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEA1JqRbGfSKHggm4rllcd7WnsCa4Pm7y4/4xw01+pNI3gtWXOv
-LX3xU3E9CdQzU8U7rFG3e8on4D7CleQdDclWam92Qn4wcC16oWqwhwrWP3+krvYj
-KEFx7pMMvvg/Jc/shnyjugNogyN7guhtMsdfUDOsxOsk4GN/1iW0oOfrNnm7DrhW
-Ma6yL9lKIjnLr96jZOUSRl7+tld5nRwvsDmLcgl5oGM+KMWi6hcsn/lvzGz+i53j
-74oaI9uAMRtfd5bvaRg6vjUQQun9gp1CdJ0ho3+qWDWZqcE0ew7xCpO40sbVwY2B
-3Y7XAFAp81vPLFalnGVBa70SP7tMVvRDRimJ0wIDAQABAoIBAGnXxbxVd5AENh+Z
-p7DIjgW+pbbHBQpgWRgE693uXJbi9pjI+hZI1AL5piylgyQaVhn02Mb9HpsKQ6+B
-0GETsjzs3tA9qHnAeoOv7NBeOcmFD4S3L0uUQVdHyBmu1ylI+XT+yjgKCFb5LD1A
-31RfY3k3MLUcZ9B6WKNRRDqzGyuTyALgCUbBJVHYHS959mtW7A4Bm924xP96SrZI
-10cxQfadw9TT08B7drKf0qNdV5DVNJ+PDwNfMzH488+8PLCWF1WmUMsNTjfttuyG
-N/itX6Ewusq69PaZJBPuoTi++1kBMhM69aJ+yaVWr4RLkpBRl+vKTfKnAT5RMPiQ
-RFaiQkkCgYEA2RduAWLaepQE/GtE7EJYfAHnKYFPjqWm/44MwY/QmgcYMCzGe6+C
-8l3vMr7klhIkmSyw1e8zKHtf/5luvYWv0vyeC42XpJwA7mLcXBmdCmoMARblF5g7
-XdVWvk+gmWM2nrO8QrallPIs8OUSpsYOnrrpBYHGGezdLeToX368T+UCgYEA+rU7
-eCIpKwoAzKugGD+CyOMJofBf4Tzcjjwh+W3LHT958xlN9oP4Dfjkt0NTHHNuzsWA
-r3tcCCDj1/aLChb6Y9GkUrkFe74qz9mTTySjhKLZCvgISR+vOuP/Ytcx1FLZf57m
-/2HBO67dnKoMj+6L0RNy0hF0kOJHOaaBMzMcp1cCgYA+5CTATg0ROdR/8+uRrl7H
-/h0jzwxnPOI2YsabRLigBrIhMreFmYEMCd6ECv1Z5IOpxGKud4+QiL105NRKH3Ki
-YwC+RBTMYU17wjQoklsGa1Zy8lkIDtgUBPwOQi86gJ2QOG2vvg4WKlqOpy5SFkqh
-/XAIYmIrnI0vAIO5NpQDaQKBgQCD3uAxCIbvBIv3HC9RkdaRJBrk+zLznrfEeQzF
-zmKQN9tFa4H+sNvBPbHQU7FbvbwDNw/BPfnirKor5pqr6/o4lwUAHiIsPJL4UVGS
-x4rbMW1Iv75b+DaLm3Gx489qB0owPrzyh9DEO+6FgUyqSKdyifBTXqsZqmwcfuBm
-tfPUcQKBgQCGpCEPCBf6Xv0Mn3wXZRYWKgTlRC3ChqsqOO8x3zPgOZGWm3x5byO3
-H81hQMANM1t0ZAzh3/Aoz0gk0H/0zjWWDlr9FpRrBkymWQe5CtWLXO5IDV+RgVfq
-g5JSVKkQHGYgGOu7VgzPyFTPy+G/6z/JR7ftmvxvIqjPa4OesHbAng==
+... (my private key content here) ...
 -----END RSA PRIVATE KEY-----'''
 
+# NOTE: Import the RSA key object from the PEM-formatted string
 private_key = RSA.import_key(private_key_str)
 
 # 2. Decode ciphertext
-ciphertext = base64.b64decode("ScA1VOwk5IhOOxCcNwVVM2HJDO2ni6oxAI8lyVXndS5bJSppDKUuQ+fwTVSQQbsaHTJXrXEnStV7EVK/cn1HqGCEmkg+aUZ3I+FY97upXRAaG92Lvh8Zgfy2HN4gZofbcrGvdMlniGAUszP5M2wcjtO4e2IbswKNTf0uaJrUIqZn3eNMFSqArrMAo4eIoAoJ3f61jIkeUTJB8sJHvzVXkVgcjFY7zLlU+sg3Q0FAqm8Ipi6nKQbyx3JPWMub/aZtZpZER11ThEQfw8+xFKBvaiLlG258VajrCReT8dgseYCeDeCpN3JG90uXP35K0aQ6P+sJysjO1UZTDx0cTYp4NA==")
+# NOTE: The ciphertext is base64-encoded, so decode it back to raw bytes
+ciphertext = base64.b64decode("ScA1VOwk5IhOOxCcNwVV...")  # Truncated for readability
 
 # 3. Decrypt
+# NOTE: Initialize the RSA cipher using OAEP padding and the imported private key
 cipher_rsa = PKCS1_OAEP.new(private_key)
+
+# NOTE: Decrypt the ciphertext to retrieve the original plaintext message
 plaintext = cipher_rsa.decrypt(ciphertext)
 
+# NOTE: Print the decrypted message, converting bytes to a string
 print("Decrypted:", plaintext.decode())
 ```
 the output:
@@ -165,16 +159,21 @@ To compute the SHA-256 hash of different messages to observe how small changes i
 #### 🔧 Implementation
 
 ```python
-import hashlib
+import hashlib  # Importing the hashlib module to perform hashing (e.g., SHA-256)
 
 # Input data
-data1 = "hello"
-data2 = "hello "
+data1 = "hello"     # First input string (no space at the end)
+data2 = "hello "    # Second input string (with a space at the end)
 
 # Hash
+# Compute the SHA-256 hash of the first input string after encoding it to bytes
 hash1 = hashlib.sha256(data1.encode()).hexdigest()
+
+# Compute the SHA-256 hash of the second input string after encoding it to bytes
 hash2 = hashlib.sha256(data2.encode()).hexdigest()
 
+# Print the resulting hashes
+# This shows how even a small change (like a space) completely changes the hash
 print("Hash of data1:", hash1)
 print("Hash of data2:", hash2)
 ```
@@ -202,38 +201,14 @@ To demonstrate how RSA can be used not only for encryption but also for signing 
 
 First I create a file to sign(digital_file.txt) and a signature file using my private key.
 ```python
-from Crypto.Signature import pkcs1_15
-from Crypto.PublicKey import RSA
-from Crypto.Hash import SHA256
-import base64
+from Crypto.Signature import pkcs1_15  # Importing PKCS#1 v1.5 signature scheme
+from Crypto.PublicKey import RSA       # Importing RSA key handling
+from Crypto.Hash import SHA256         # Importing SHA256 for hashing
+import base64                          # Base64 encoding for saving the signature as readable text
 
-# 1. Load Raja's private key from the string (PEM format)
+# 1. Load my private key from the string (PEM format)
 private_key_str = '''-----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEA1JqRbGfSKHggm4rllcd7WnsCa4Pm7y4/4xw01+pNI3gtWXOv
-LX3xU3E9CdQzU8U7rFG3e8on4D7CleQdDclWam92Qn4wcC16oWqwhwrWP3+krvYj
-KEFx7pMMvvg/Jc/shnyjugNogyN7guhtMsdfUDOsxOsk4GN/1iW0oOfrNnm7DrhW
-Ma6yL9lKIjnLr96jZOUSRl7+tld5nRwvsDmLcgl5oGM+KMWi6hcsn/lvzGz+i53j
-74oaI9uAMRtfd5bvaRg6vjUQQun9gp1CdJ0ho3+qWDWZqcE0ew7xCpO40sbVwY2B
-3Y7XAFAp81vPLFalnGVBa70SP7tMVvRDRimJ0wIDAQABAoIBAGnXxbxVd5AENh+Z
-p7DIjgW+pbbHBQpgWRgE693uXJbi9pjI+hZI1AL5piylgyQaVhn02Mb9HpsKQ6+B
-0GETsjzs3tA9qHnAeoOv7NBeOcmFD4S3L0uUQVdHyBmu1ylI+XT+yjgKCFb5LD1A
-31RfY3k3MLUcZ9B6WKNRRDqzGyuTyALgCUbBJVHYHS959mtW7A4Bm924xP96SrZI
-10cxQfadw9TT08B7drKf0qNdV5DVNJ+PDwNfMzH488+8PLCWF1WmUMsNTjfttuyG
-N/itX6Ewusq69PaZJBPuoTi++1kBMhM69aJ+yaVWr4RLkpBRl+vKTfKnAT5RMPiQ
-RFaiQkkCgYEA2RduAWLaepQE/GtE7EJYfAHnKYFPjqWm/44MwY/QmgcYMCzGe6+C
-8l3vMr7klhIkmSyw1e8zKHtf/5luvYWv0vyeC42XpJwA7mLcXBmdCmoMARblF5g7
-XdVWvk+gmWM2nrO8QrallPIs8OUSpsYOnrrpBYHGGezdLeToX368T+UCgYEA+rU7
-eCIpKwoAzKugGD+CyOMJofBf4Tzcjjwh+W3LHT958xlN9oP4Dfjkt0NTHHNuzsWA
-r3tcCCDj1/aLChb6Y9GkUrkFe74qz9mTTySjhKLZCvgISR+vOuP/Ytcx1FLZf57m
-/2HBO67dnKoMj+6L0RNy0hF0kOJHOaaBMzMcp1cCgYA+5CTATg0ROdR/8+uRrl7H
-/h0jzwxnPOI2YsabRLigBrIhMreFmYEMCd6ECv1Z5IOpxGKud4+QiL105NRKH3Ki
-YwC+RBTMYU17wjQoklsGa1Zy8lkIDtgUBPwOQi86gJ2QOG2vvg4WKlqOpy5SFkqh
-/XAIYmIrnI0vAIO5NpQDaQKBgQCD3uAxCIbvBIv3HC9RkdaRJBrk+zLznrfEeQzF
-zmKQN9tFa4H+sNvBPbHQU7FbvbwDNw/BPfnirKor5pqr6/o4lwUAHiIsPJL4UVGS
-x4rbMW1Iv75b+DaLm3Gx489qB0owPrzyh9DEO+6FgUyqSKdyifBTXqsZqmwcfuBm
-tfPUcQKBgQCGpCEPCBf6Xv0Mn3wXZRYWKgTlRC3ChqsqOO8x3zPgOZGWm3x5byO3
-H81hQMANM1t0ZAzh3/Aoz0gk0H/0zjWWDlr9FpRrBkymWQe5CtWLXO5IDV+RgVfq
-g5JSVKkQHGYgGOu7VgzPyFTPy+G/6z/JR7ftmvxvIqjPa4OesHbAng==
+... (my private key content here) ...
 -----END RSA PRIVATE KEY-----'''
 
 private_key = RSA.import_key(private_key_str)
@@ -246,7 +221,7 @@ with open(filename, "rb") as f:
 # 3. Create a hash of the file data
 hash = SHA256.new(file_data)
 
-# 4. Sign the hash using Raja's private key
+# 4. Sign the hash using my private key
 signature = pkcs1_15.new(private_key).sign(hash)
 
 # 5. Save the signature to a file
