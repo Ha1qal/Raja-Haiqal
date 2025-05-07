@@ -31,7 +31,7 @@ To encrypt and decrypt a plaintext message using AES (Advanced Encryption Standa
 
 #### 🔧 Implementation
 
-You can see Danish encrypt python code in his github repo()
+You can see how Danish encrypt using aes-cbc in python code in his [github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-1-symmetric-encryption-aes)
 
 I will be using this python code that i have created to decrypt Danish's message with the key and iv given.
 ```python
@@ -56,6 +56,7 @@ plaintext = padded_plaintext[:-pad_len]
 print("Decrypted:", plaintext.decode())
 ```
 the output:
+
 ![aes decrypt result](screenshots/aes_decryption_result.png)
 
 #### 📚 Explanation
@@ -95,7 +96,7 @@ print("RSA key pair generated.")
 ```
 the output will give 2 file and that is raja_public.pem and raja_private.pem.I will give danish my raja_public.pem.
 
-See Danish's Github repo to see how he encrypt using my public key()
+See Danish's [Github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-2-asymmetric-encryption-rsa) to see how he encrypt using my public key()
 
 then i try to decrypt the message given by Danish using my private key.
 ```python
@@ -144,6 +145,7 @@ plaintext = cipher_rsa.decrypt(ciphertext)
 print("Decrypted:", plaintext.decode())
 ```
 the output:
+
 ![rsa decryption](screenshots/rsa_decryption.png)
 
 #### 📚 Explanation
@@ -167,7 +169,7 @@ import hashlib
 
 # Input data
 data1 = "hello"
-data2 = "hello world"
+data2 = "hello "
 
 # Hash
 hash1 = hashlib.sha256(data1.encode()).hexdigest()
@@ -176,6 +178,11 @@ hash2 = hashlib.sha256(data2.encode()).hexdigest()
 print("Hash of data1:", hash1)
 print("Hash of data2:", hash2)
 ```
+the output:
+
+![hash output](screenshots/hash_output.png)
+see even i added just a " "(space) after the word "Hello" it changed dastically.
+See Danish's output too in his [Github Repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-3-hashing-sha-256)
 
 #### 📚 Explanation
 
@@ -249,7 +256,9 @@ with open("file_signature.txt", "w") as sig_file:
 
 print(f"Signature saved to 'file_signature.txt'.")
 ```
-then i created the signature file.After that,I need to give the signature file and the text file that I signed(digital_file.txt) to danish to verify.
+then i created the signature file.After that,I need to give the signature file and the text file that I signed(digital_file.txt) to danish to verify.[Danish' Github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-4-digital-signatures-rsa)
+
+
 #### 📚 Explanation
 
 - **Digital Signature Process:**
@@ -276,8 +285,3 @@ These implementations are fundamental in real-world cybersecurity solutions such
 
 ---
 
-## ✅ D. Bonus Tips
-
-- Always store your private keys securely. Never hard-code them in public scripts.
-- Use libraries like `cryptography`, `pycryptodome`, or `hashlib` for reliable implementations.
-- For production systems, avoid ECB mode and use secure key management solutions.
