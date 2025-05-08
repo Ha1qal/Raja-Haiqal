@@ -1,7 +1,8 @@
 
 # Lab 4: Implementing Cryptography with Python
 
-**Name:** Adli Jaafar  
+**Name:** Raja Muhammad Haiqal Shah Bin Raja Muzairil Shah Bin Raja Muzairil Shah
+**Partner Name:**Ahmad Danish Haikal Bin Abdullah
 **Course:** Network Security  
 **Lab Date:** April 20  
 **Lab Type:** Hands-On + Report + Demo/Debrief  
@@ -88,22 +89,22 @@ To implement RSA, an asymmetric algorithm, for encrypting a message using a publ
 
 I will be creating private and public key and give public key to danish for him to encrypt the message.
 ```python
-from Crypto.PublicKey import RSA
+from Crypto.PublicKey import RSA  # Import the RSA module from PyCryptodome for generating RSA keys
 
-# 1. Generate RSA key pair (2048 bits is standard)
-key_pair = RSA.generate(2048)
+# 1. Generate RSA key pair (2048 bits is standard for secure encryption)
+key_pair = RSA.generate(2048)  # Create a new RSA key pair with 2048-bit key size
 
 # 2. Export the private key (keep this secret!)
-private_key = key_pair.export_key()
-with open("raja_private.pem", "wb") as f:
-    f.write(private_key)
+private_key = key_pair.export_key()  # Convert the private key to a byte format suitable for saving
+with open("raja_private.pem", "wb") as f:  # Open a file in write-binary mode to store the private key
+    f.write(private_key)  # Save the private key to the file "raja_private.pem"
 
-# 3. Export the public key (share this with me for encryption)
-public_key = key_pair.publickey().export_key()
-with open("raja_public.pem", "wb") as f:
-    f.write(public_key)
+# 3. Export the public key (share this with others for encryption)
+public_key = key_pair.publickey().export_key()  # Extract the public key from the key pair and convert to bytes
+with open("raja_public.pem", "wb") as f:  # Open a file in write-binary mode to store the public key
+    f.write(public_key)  # Save the public key to the file "raja_public.pem"
 
-print("RSA key pair generated.")
+print("RSA key pair generated.")  # Inform the user that the key pair has been successfully created
 ```
 the output will give 2 file and that is raja_public.pem and raja_private.pem.I will give danish my raja_public.pem.
 
@@ -186,23 +187,32 @@ See Danish's output too in his [Github Repo](https://github.com/nishsem/Danish/b
 
 Same goes as hashing a file:
 ```python
-import hashlib
+import hashlib  # Import Python's built-in library for cryptographic hashing functions
 
 def compute_file_hash(filepath):
-    """Compute SHA-256 hash of a file."""
-    sha256_hash = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):  # Read file in chunks
-            sha256_hash.update(chunk)
-    return sha256_hash.hexdigest()
+    """
+    Compute SHA-256 hash of a file.
+    This function takes the path of a file and returns its SHA-256 hash in hexadecimal.
+    """
+    sha256_hash = hashlib.sha256()  # Create a new SHA-256 hash object
 
-# Example usage
+    # Open the file in binary mode ('rb') to read bytes
+    with open(filepath, "rb") as f:
+        # Read the file in chunks of 4096 bytes to handle large files efficiently
+        for chunk in iter(lambda: f.read(4096), b""):  
+            sha256_hash.update(chunk)  # Update the hash with the content of each chunk
+
+    return sha256_hash.hexdigest()  # Return the final hash value in hexadecimal format
+
+# Example usage — specify the full path to each file
 file1 = r"C:\Users\fl4me\Documents\Cryptography\Raja-Haiqal\Cryptography-Class\Assessments\Lab Works\Lab 4\src\file1.txt"
 file2 = r"C:\Users\fl4me\Documents\Cryptography\Raja-Haiqal\Cryptography-Class\Assessments\Lab Works\Lab 4\src\file2.txt"
 
+# Compute the hash for both files
 hash1 = compute_file_hash(file1)
 hash2 = compute_file_hash(file2)
 
+# Print the SHA-256 hash of each file
 print(f"Hash of {file1}:", hash1)
 print(f"Hash of {file2}:", hash2)
 
@@ -237,35 +247,35 @@ To demonstrate how RSA can be used not only for encryption but also for signing 
 
 First I create a file to sign(digital_file.txt) and a signature file using my private key.
 ```python
-from Crypto.Signature import pkcs1_15  # Importing PKCS#1 v1.5 signature scheme
-from Crypto.PublicKey import RSA       # Importing RSA key handling
-from Crypto.Hash import SHA256         # Importing SHA256 for hashing
-import base64                          # Base64 encoding for saving the signature as readable text
+from Crypto.Signature import pkcs1_15  # Importing PKCS#1 v1.5 standard for creating RSA signatures
+from Crypto.PublicKey import RSA       # Module for handling RSA key import/export
+from Crypto.Hash import SHA256         # SHA256 is used to hash the message (file content)
+import base64                          # Base64 used to encode signature for easier saving/sharing
 
-# 1. Load my private key from the string (PEM format)
+# 1. Load your private key (used to generate digital signature)
 private_key_str = '''-----BEGIN RSA PRIVATE KEY-----
 ... (my private key content here) ...
------END RSA PRIVATE KEY-----'''
+-----END RSA PRIVATE KEY-----'''  # The actual private key content must be inserted here
 
-private_key = RSA.import_key(private_key_str)
+private_key = RSA.import_key(private_key_str)  # Converts the PEM-format string to an RSA key object
 
-# 2. Load the message from the txt file
-filename = r"C:\Users\fl4me\Documents\Cryptography\Raja-Haiqal\Cryptography-Class\Assessments\Lab Works\Lab 4\src\digital_file.txt"  # Raja will sign this file
-with open(filename, "rb") as f:
-    file_data = f.read()
+# 2. Load the file you want to digitally sign
+filename = r"C:\Users\fl4me\Documents\Cryptography\Raja-Haiqal\Cryptography-Class\Assessments\Lab Works\Lab 4\src\digital_file.txt"
+with open(filename, "rb") as f:  # Open the file in binary mode for reading
+    file_data = f.read()  # Read the entire file content
 
-# 3. Create a hash of the file data
-hash = SHA256.new(file_data)
+# 3. Create a hash (SHA-256) of the file data
+hash = SHA256.new(file_data)  # Compute the SHA-256 hash of the file. This hash will be signed.
 
-# 4. Sign the hash using my private key
-signature = pkcs1_15.new(private_key).sign(hash)
+# 4. Create a digital signature of the hash using your private key
+signature = pkcs1_15.new(private_key).sign(hash)  # Sign the hash using the private key
 
-# 5. Save the signature to a file
-signature_b64 = base64.b64encode(signature).decode('utf-8')
-with open("file_signature.txt", "w") as sig_file:
-    sig_file.write(signature_b64)
+# 5. Save the digital signature to a file (encoded in Base64)
+signature_b64 = base64.b64encode(signature).decode('utf-8')  # Convert the binary signature to Base64 for easy storage
+with open("file_signature.txt", "w") as sig_file:  # Create/open a text file to save the signature
+    sig_file.write(signature_b64)  # Write the Base64 signature to the file
 
-print(f"Signature saved to 'file_signature.txt'.")
+print(f"Signature saved to 'file_signature.txt'.")  # Let the user know the signature was created and saved
 ```
 then i created the signature file.After that,I need to give the signature file and the text file that I signed(digital_file.txt) to danish to verify.[Danish' Github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-4-digital-signatures-rsa)
 
