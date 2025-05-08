@@ -7,7 +7,6 @@
 **Lab Date:** April 20  
 **Lab Type:** Hands-On + Report + Demo/Debrief  
 **Total Marks:** 15  
-
 ---
 
 ## 🧠 A. Objective
