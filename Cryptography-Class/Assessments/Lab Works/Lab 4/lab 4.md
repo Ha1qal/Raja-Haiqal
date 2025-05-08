@@ -31,7 +31,7 @@ Each task aims to simulate real-world security practices such as secure file tra
 To encrypt and decrypt a plaintext message using AES (Advanced Encryption Standard), a symmetric key algorithm that is fast and secure for encrypting data.
 
 #### 🔧 Implementation
-# 1.Danish encrypt the message using the python code below
+#### 1.Danish encrypt the message using the python code below
 ```python
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
@@ -61,7 +61,7 @@ print("IV:", base64.b64encode(iv).decode())
 ```
 You can see how Danish encrypt using aes-cbc in python code in detail in his [github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-1-symmetric-encryption-aes)
 
-# 2.I will be using this python code that i have created to decrypt Danish's message with the key and iv given.
+#### 2.I will be using this python code that i have created to decrypt Danish's message with the key and iv given.
 ```python
 from Crypto.Cipher import AES  # NOTE: Import AES cipher from pycryptodome
 import base64  # NOTE: Import base64 to decode the encoded key, IV, and ciphertext
@@ -114,7 +114,7 @@ To implement RSA, an asymmetric algorithm, for encrypting a message using a publ
 
 #### 🔧 Implementation
 
-# 1.I will be creating private and public key and give public key to danish for him to encrypt the message.
+#### 1.I will be creating private and public key and give public key to danish for him to encrypt the message.
 ```python
 from Crypto.PublicKey import RSA  # Import the RSA module from PyCryptodome for generating RSA keys
 
@@ -137,7 +137,7 @@ the output will give 2 file and that is raja_public.pem and raja_private.pem.I w
 
 See Danish's [Github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-2-asymmetric-encryption-rsa) to see how he encrypt using my public key()
 
-# 2.Then i try to decrypt the message given by Danish using my private key.
+#### 2.Then i try to decrypt the message given by Danish using my private key.
 ```python
 from Crypto.PublicKey import RSA  # Import the RSA module to handle RSA keys
 from Crypto.Cipher import PKCS1_OAEP  # Import the cipher method for RSA decryption
@@ -183,7 +183,7 @@ the output:
 
 #### ✅ Objective
 To compute the SHA-256 hash of different messages to observe how small changes in input produce significantly different hashes (avalanche effect).
-# 1.I write a python code that can compute sha256 hash of a given message.
+#### 1.I write a python code that can compute sha256 hash of a given message.
 #### 🔧 Implementation
 
 ```python
@@ -212,7 +212,7 @@ the output:
 see even i added just a " "(space) after the word "Hello" it changed dastically.
 See Danish's output too in his [Github Repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-3-hashing-sha-256)
 
-# 2.Same goes as hashing a file:
+#### 2.Same goes as hashing a file:
 ```python
 import hashlib  # Import Python's built-in library for cryptographic hashing functions
 
@@ -272,7 +272,7 @@ To demonstrate how RSA can be used not only for encryption but also for signing 
 
 #### 🔧 Implementation
 
-# 1.First I create a file to sign(digital_file.txt) and a signature file using my private key.
+#### 1.First I create a file to sign(digital_file.txt) and a signature file using my private key.
 ```python
 from Crypto.Signature import pkcs1_15  # Importing PKCS#1 v1.5 standard for creating RSA signatures
 from Crypto.PublicKey import RSA       # Module for handling RSA key import/export
