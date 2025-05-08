@@ -180,8 +180,44 @@ print("Hash of data2:", hash2)
 the output:
 
 ![hash output](screenshots/hash_output.png)
+
 see even i added just a " "(space) after the word "Hello" it changed dastically.
 See Danish's output too in his [Github Repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-3-hashing-sha-256)
+
+Same goes as hashing a file:
+```python
+import hashlib
+
+def compute_file_hash(filepath):
+    """Compute SHA-256 hash of a file."""
+    sha256_hash = hashlib.sha256()
+    with open(filepath, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):  # Read file in chunks
+            sha256_hash.update(chunk)
+    return sha256_hash.hexdigest()
+
+# Example usage
+file1 = r"C:\Users\fl4me\Documents\Cryptography\Raja-Haiqal\Cryptography-Class\Assessments\Lab Works\Lab 4\src\file1.txt"
+file2 = r"C:\Users\fl4me\Documents\Cryptography\Raja-Haiqal\Cryptography-Class\Assessments\Lab Works\Lab 4\src\file2.txt"
+
+hash1 = compute_file_hash(file1)
+hash2 = compute_file_hash(file2)
+
+print(f"Hash of {file1}:", hash1)
+print(f"Hash of {file2}:", hash2)
+
+```
+output if i added " "(space) for the second text file:
+
+![hashing with space](screenshots/hashingfilespace.png)
+
+the output is completely different.
+
+what if we have 2 file with same content?:
+
+![hashing same input both file](screenshots/hashingsamefile.png)
+
+the hash would be the same because the content are the same!
 
 #### 📚 Explanation
 
