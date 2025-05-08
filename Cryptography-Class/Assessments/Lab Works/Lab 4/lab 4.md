@@ -31,10 +31,37 @@ Each task aims to simulate real-world security practices such as secure file tra
 To encrypt and decrypt a plaintext message using AES (Advanced Encryption Standard), a symmetric key algorithm that is fast and secure for encrypting data.
 
 #### 🔧 Implementation
+# 1.Danish encrypt the message using the python code below
+```python
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+import base64
 
-You can see how Danish encrypt using aes-cbc in python code in his [github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-1-symmetric-encryption-aes)
+# 1. Generate a 32-byte key for AES-256
+key = get_random_bytes(32)  # 32 bytes = 256 bits
 
-I will be using this python code that i have created to decrypt Danish's message with the key and iv given.
+# 2. Create a random Initialization Vector (IV) for CBC mode
+iv = get_random_bytes(16)  # AES block size is 16 bytes
+
+# 3. Create AES cipher object
+cipher = AES.new(key, AES.MODE_CBC, iv)
+
+# 4. Prepare plaintext (must be padded to a multiple of 16 bytes)
+plaintext = b"Cryptography Lab by Danish & Raja"
+pad_len = 16 - len(plaintext) % 16
+padded_plaintext = plaintext + bytes([pad_len] * pad_len)
+
+# 5. Encrypt the plaintext
+ciphertext = cipher.encrypt(padded_plaintext)
+
+# 6. Encode ciphertext, IV, and key in base64 to share safely
+print("Ciphertext:", base64.b64encode(ciphertext).decode())
+print("Key:", base64.b64encode(key).decode())
+print("IV:", base64.b64encode(iv).decode())
+```
+You can see how Danish encrypt using aes-cbc in python code in detail in his [github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-1-symmetric-encryption-aes)
+
+# 2.I will be using this python code that i have created to decrypt Danish's message with the key and iv given.
 ```python
 from Crypto.Cipher import AES  # NOTE: Import AES cipher from pycryptodome
 import base64  # NOTE: Import base64 to decode the encoded key, IV, and ciphertext
@@ -87,7 +114,7 @@ To implement RSA, an asymmetric algorithm, for encrypting a message using a publ
 
 #### 🔧 Implementation
 
-I will be creating private and public key and give public key to danish for him to encrypt the message.
+# 1.I will be creating private and public key and give public key to danish for him to encrypt the message.
 ```python
 from Crypto.PublicKey import RSA  # Import the RSA module from PyCryptodome for generating RSA keys
 
@@ -110,7 +137,7 @@ the output will give 2 file and that is raja_public.pem and raja_private.pem.I w
 
 See Danish's [Github repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-2-asymmetric-encryption-rsa) to see how he encrypt using my public key()
 
-then i try to decrypt the message given by Danish using my private key.
+# 2.Then i try to decrypt the message given by Danish using my private key.
 ```python
 from Crypto.PublicKey import RSA  # Import the RSA module to handle RSA keys
 from Crypto.Cipher import PKCS1_OAEP  # Import the cipher method for RSA decryption
@@ -156,7 +183,7 @@ the output:
 
 #### ✅ Objective
 To compute the SHA-256 hash of different messages to observe how small changes in input produce significantly different hashes (avalanche effect).
-
+# 1.I write a python code that can compute sha256 hash of a given message.
 #### 🔧 Implementation
 
 ```python
@@ -185,7 +212,7 @@ the output:
 see even i added just a " "(space) after the word "Hello" it changed dastically.
 See Danish's output too in his [Github Repo](https://github.com/nishsem/Danish/blob/main/Cryptography-Class/Assessments/2-Lab-Works-20%25/Lab-Work-4/readme.md#task-3-hashing-sha-256)
 
-Same goes as hashing a file:
+# 2.Same goes as hashing a file:
 ```python
 import hashlib  # Import Python's built-in library for cryptographic hashing functions
 
@@ -245,7 +272,7 @@ To demonstrate how RSA can be used not only for encryption but also for signing 
 
 #### 🔧 Implementation
 
-First I create a file to sign(digital_file.txt) and a signature file using my private key.
+# 1.First I create a file to sign(digital_file.txt) and a signature file using my private key.
 ```python
 from Crypto.Signature import pkcs1_15  # Importing PKCS#1 v1.5 standard for creating RSA signatures
 from Crypto.PublicKey import RSA       # Module for handling RSA key import/export
