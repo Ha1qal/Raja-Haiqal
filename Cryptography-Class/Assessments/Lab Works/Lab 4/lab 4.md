@@ -2,7 +2,7 @@
 # Lab 4: Implementing Cryptography with Python
 
 **Name:** Raja Muhammad Haiqal Shah Bin Raja Muzairil Shah Bin Raja Muzairil Shah
-**Partner Name:**Ahmad Danish Haikal Bin Abdullah
+**Partner Name:** Ahmad Danish Haikal Bin Abdullah
 **Course:** Network Security  
 **Lab Date:** April 20  
 **Lab Type:** Hands-On + Report + Demo/Debrief  
