@@ -48,7 +48,7 @@ gpg --list-keys
 1. Create a file `message.txt` containing:
 
 ```
-This file was encrypted by [Your Name] ([Your Student ID])
+This file was encrypted by Raja Muhammad Haiqal Shah NWS23010059
 ```
 
 ![!\[alt text\](message-txt-content.jpg)](screenshots/message-txt-content.jpg)
@@ -103,6 +103,7 @@ gpg --detach-sign signed_message.txt
 gpg --verify signed_message.txt.sig signed_message.txt
 ```
 detach-sign output:
+
 ![detachsignoutput](<screenshots/detach sign.jpg>)
 
 
@@ -141,15 +142,20 @@ Then create folder for the key and give permission:
 ssh raja@192.168.106.130
 ```
 
-4. Create a file with your student ID:
+![sshwithoutpassword](screenshots/sshwithoutpasswordtest.png)
+
+4. SSH verification,View File Contents and Confirm Remote User
 
 ```bash
-ssh user@hostname "echo NWS23010059 > RajaMuhammadHaiqalShah.txt"
+ ssh raja@192.168.106.130 "echo NWS23010059 > Raja_Muhammad_Haiqal_Shah.txt"
+
+ ssh raja@192.168.106.130 "cat Raja_Muhammad_Haiqal_Shah.txt"
+
+ ssh raja@192.168.106.130 whoami
 ```
-I have successfully create file in my kali ssh  and access it without password:
+**Expected Output:**
 
-![!\[alt text\](<Task4 success.jpg>)](<screenshots/Task4 success.jpg>)
-
+![output](screenshots/echosssh.png)
 
 ---
 
@@ -321,5 +327,6 @@ e583cee9ab9d7626c970fd6e9938fcb2d06fbbd12f1c1a3c6902a215808c825c:Begitulah Lumra
 
 ---
 
-## Submission Instructions
+## Conclusion:
+Throughout these tasks, I demonstrated core cryptographic operations including GPG key generation, encryption/decryption, digital signing, passwordless SSH configuration, and hash cracking using multiple tools and techniques. This assessment has enhanced my understanding of practical security implementations and attack surfaces.
 
