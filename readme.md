@@ -17,3 +17,7 @@ This repository includes:
 - [Lab 1: Brute Force and Traffic Analysis on Network Protocols](./Cryptography-Class/Assessments/Lab%20Works/Lab%201/Lab%201.md)  
 - [Lab 2: Cracking Weak Password Hashes and Exploiting Poor Authentication in Databases](<Cryptography-Class/Assessments/Lab Works/Lab 2/Lab 2.md>)
 - [Lab 3: Hashing, Encryption, and Digital Signatures](<Cryptography-Class/Assessments/Lab Works/Lab 3/readme.md>)
+- [Lab 4: Implementing Cryptography with Python](<Cryptography-Class/Assessments/Lab Works/Lab 4/lab 4.md>)
+  
+🧪 **Practical test** 
+- [Practical Test 1](<Cryptography-Class/Assessments/Practical Test/Practical test 1.md>)
