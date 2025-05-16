@@ -187,7 +187,7 @@ it detected base64 but the output still gibberish so i try to decode again using
 
 ![output1](screenshots/dcode.png)
 
-but what rot it using?so i try to enumarate in cyberchef
+but what ROT it using?so i try to enumarate in cyberchef
 
 ![cyberchefoutput](screenshots/cyberchef.png)
 
