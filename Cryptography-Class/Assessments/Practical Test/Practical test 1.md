@@ -177,7 +177,7 @@ ssh raja@192.168.106.130
 - Tools, wordlists, or methods used (e.g., `john`, `hashcat`, base64 decode).
 
 **Example commands:**
-#### 1.SnZlcmV4IEF2IEpmcmNyZSBFeiBCcnJl for this i used hashid says that it is base64 and then i try to decode it still show gibberish output and then base on the output it need to decode in ROT but i dont know which rot to use so i create a script to decode base64 and enumarate ROT-1 until ROT-25.
+#### 1.First, I detected that the string SnZlcmV4IEF2IEpmcmNyZSBFeiBCcnJl was encoded in Base64, so I decoded it. However, the output was still gibberish. Based on the result, I suspected it was further encoded with a ROT cipher, but I wasn’t sure which ROT to use. So, I wrote a script to decode the Base64 and then enumerate through ROT-1 to ROT-25 to find the correct one.Other option is using tools online like dcode or cyberchef.
 
 using cyberchef(magic mode):
 
@@ -277,10 +277,8 @@ Base64 decoded: Jverex Av Jfrcre Ez Brre
 Found exact match with ROT-9: 'Senang Je Soalan Ni Kaan'
 ```
 
-![outputbase64nrot](screenshots/base64nRotoutput.png)
 
-
-#### 2.7b77ca1e2b3e7228a82ecbc7ca0e6b52 i use hash-identifier it say that it is md5 so i create a script to brute-force it or u can use hashcat.
+#### 2.7b77ca1e2b3e7228a82ecbc7ca0e6b52 i use hash-identifier it say that it is md5 so i create a script to brute-force it or i can use hashcat.
 
 ```bash
 hashcat -m 0 -a 0 -o cracked.txt hash.txt wordlist.txt
@@ -291,9 +289,6 @@ this command will save the output in the cracked.txt file so we have to cat it.
 7b77ca1e2b3e7228a82ecbc7ca0e6b52:Assalamualaikum Semua
 ```
 
-**Expected Output:**
-
-![Cryptography-Class/Assessments/Practical Test/screenshots/md5output.png](screenshots/md5output.png)
 
 #### 3.e583cee9ab9d7626c970fd6e9938fcb2d06fbbd12f1c1a3c6902a215808c825c using hash-identifier i got the result sha256.
 
