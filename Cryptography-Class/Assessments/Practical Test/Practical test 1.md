@@ -291,9 +291,6 @@ this command will save the output in the cracked.txt file so we have to cat it.
 7b77ca1e2b3e7228a82ecbc7ca0e6b52:Assalamualaikum Semua
 ```
 
-```python
-
-```
 **Expected Output:**
 ```
 Brute-forcing hash: 7b77ca1e2b3e7228a82ecbc7ca0e6b52
@@ -324,6 +321,12 @@ e583cee9ab9d7626c970fd6e9938fcb2d06fbbd12f1c1a3c6902a215808c825c:Begitulah Lumra
 ```
 
 ![sha256output](screenshots/sha256.png)
+
+| Hash                                      |     output      |  
+|-------------------------------------------|-----------------|  
+| SnZlcmV4IEF2IEpmcmNyZSBFeiBCcnJl          |  Senang Je Soalan Ni Kaan |  
+| 7b77ca1e2b3e7228a82ecbc7ca0e6b52          |   Assalamualaikum Semua  |  
+| e583cee9ab9d7626c970fd6e9938fcb2d06fbbd12f1c1a3c6902a215808c825c | Begitulah Lumrah Kehidupan       |
 
 ---
 
