@@ -292,17 +292,7 @@ this command will save the output in the cracked.txt file so we have to cat it.
 ```
 
 **Expected Output:**
-```
-Brute-forcing hash: 7b77ca1e2b3e7228a82ecbc7ca0e6b52
-Testing wordlist variations...
 
-MATCH FOUND!
-Original: Assalamualaikum Semua
-Variation: Assalamualaikum Semua
-MD5: 7b77ca1e2b3e7228a82ecbc7ca0e6b52
-
-Testing complete.
-```
 ![Cryptography-Class/Assessments/Practical Test/screenshots/md5output.png](screenshots/md5output.png)
 
 #### 3.e583cee9ab9d7626c970fd6e9938fcb2d06fbbd12f1c1a3c6902a215808c825c using hash-identifier i got the result sha256.
