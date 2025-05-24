@@ -38,7 +38,7 @@ This project simulates a **ransomware reverse engineering challenge**. The main 
 
 ## 🧪 Windows Setup and Usage Guide
 
-### ✅ Step 1: Analyze malware file
+## ✅ Step 1: Analyze malware file
 
 #### I extract the hash file to confirm that this is the file that sir gave for practical test.
 
@@ -57,7 +57,7 @@ This project simulates a **ransomware reverse engineering challenge**. The main 
 
 ![exe run](Screenshots/exerun.png)
 
-### ✅ Step 2: Extract File And Set Up Python Environment
+## ✅ Step 2: Extract File And Set Up Python Environment
 To decompile to python I need to use pyinsxtractor-ng(oh dont forget to download python and pyinsxtractor(github) in the machine).
 
 ![pyinsxtractor](Screenshots/pyinsxtractor.png)
@@ -146,7 +146,7 @@ the output kinda like this:
 .\simulated_ransomware.pyc --
 # Successfully decompiled file
 ```
-
+## ✅ Step 3: Reverse Engineering the Source Code
 #### Another note for me:
 #### Please turn off Windows Defender completely.
 
@@ -169,7 +169,7 @@ It uses PKCS-style padding.
 ```
 It encrypts .txt files inside the locked_files/ folder and saves them as .enc files.
 
-
+## ✅ Step 4: Create Decrypt Script
 #### so to decode it i write a script to decript the current .enc file  to .txt readable file.( python -m pip install pycryptodome in order to run the script)
 ```python
 from Crypto.Cipher import AES
