@@ -53,7 +53,7 @@ This project simulates a **ransomware reverse engineering challenge**. The main 
 
 ![DIE analyze](Screenshots/DIEanalyze.png)
 
-#### Then i curious what the malware do if we execute it,so i try to run it and it gave me 3 file .txt.enc.So my job right is to try to get to the source code and try to decode it by reverse engineering it.
+#### Then i curious what the malware do if we execute it,so i try to run it and it gave me 3 file .txt.enc under Locked_files folder.So my job right is to try to get to the source code and try to decode it by reverse engineering it.
 
 ![exe run](Screenshots/exerun.png)
 
