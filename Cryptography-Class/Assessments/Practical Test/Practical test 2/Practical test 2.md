@@ -55,12 +55,12 @@ This project simulates a **ransomware reverse engineering challenge**. The main 
 
 #### Then i curious what the malware do if we execute it,so i try to run it and it gave me 3 file .txt.enc.So my job right is to try to get to the source code and try to decode it by reverse engineering it.
 
-![run file](Screenshots/exerun.png)
+![exe run](Screenshots/exerun.png)
 
 ### ✅ Step 2: Extract File And Set Up Python Environment
 To decompile to python I need to use pyinsxtractor-ng(oh dont forget to download python and pyinsxtractor(github) in the machine).
 
-![extract using pyinsxtractor](Screenshots/pyinsxtractor.png)
+![pyinsxtractor](Screenshots/pyinsxtractor.png)
 
 #### After extract the file using pyinsxtractor,I list it in powershell to find suspicious file to see and i found simulated_ransomware.pyc the most interesting
 ```Powershell
@@ -109,11 +109,11 @@ d-----         5/24/2025  11:08 AM                setuptools
 
 #### But when i try to open the file it cant be read by vscode.Then i realise I need to convert .pyc to .py to make it readable
 
-![pyc file](Screenshots/pycfile.png)
+![pycfile](Screenshots/pycfile.png)
 
 #### So to convert it to .py i need to use uncompyle6 but i encountered an error
 
-![error](<Screenshots/uncompyle error.png>)
+![uncompyle error](<Screenshots/uncompyle error.png>)
 
 #### it says i need to run it in python environment that i have setup(silly me).Why i need to run it in evironment because the uncompyle6 support only python 3.8.0 but right now by default im running in python 3.13.0.That's why in short i have to use python environment for this particular path/folder.But i will show how to create python environment for future reference.
  
@@ -138,7 +138,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned #This Power
 ```
 the output kinda like this:
 
-![python environment](<Screenshots/output environment.png>)
+![output env](<Screenshots/output environment.png>)
 
 #### then I uncompyle it and open it in vscode.
 ```powershell
@@ -154,7 +154,7 @@ the output kinda like this:
 
 #### (I can't paste the code here because Git detects it as malware.)
 
-![source code](Screenshots/malwaresourcecode.png)
+![malwaresource code](Screenshots/malwaresourcecode.png)
 
 #### Based on the code what we know is:
 
