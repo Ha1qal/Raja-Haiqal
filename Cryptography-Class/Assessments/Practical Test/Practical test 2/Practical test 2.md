@@ -213,7 +213,7 @@ if __name__ == "__main__":
 
 ![decrypted file](<Screenshots/the decrypt file.png>)
 
-
+![output powershell](Screenshots/outputnamba2.png)
 
 
 ## ⚠️ Cryptographic Flaws Summary
