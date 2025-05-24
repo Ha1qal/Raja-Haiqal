@@ -152,8 +152,6 @@ the output kinda like this:
 
 #### When I opened the file, I found that the text was hardcoded. However, I want to try decrypting the .enc file it gave me. So, I attempted to reverse engineer the code to write a script that can decode three files which have been encoded with the .txt.enc extension.
 
-#### (I can't paste the code here because Git detects it as malware.)
-
 ![malwaresource code](Screenshots/malwaresourcecode.png)
 
 #### Based on the code what we know is:
