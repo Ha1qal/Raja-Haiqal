@@ -36,45 +36,33 @@ This project simulates a **ransomware reverse engineering challenge**. The main 
 
 ---
 
-## 🗂 Project Structure
-
-| File / Folder       | Description                                                        |
-|---------------------|--------------------------------------------------------------------|
-| analysis.md        | Detailed static analysis and decryption methodology               |
-| decrypt.py         | Python decryption tool using recovered key and algorithm          |
-| screenshots/       | Evidence of decryption and reverse engineering process            |
-| decrypted/         | Folder containing decrypted output files                          |
-| README.md          | This file – project instructions and documentation                |
-
----
-
 ## 🧪 Windows Setup and Usage Guide
 
-### ✅ Step 1: Extract File And Set Up Python Environment
+### ✅ Step 1: Analyze malware file
 
-I extract the hash file to confirm that this is the file that sir gave for practical test.
+#### I extract the hash file to confirm that this is the file that sir gave for practical test.
 
 ![file hash and whoami](Screenshots/filehash.png)
 
 
-After I have extract the file,I got an .exe file so i was curious so I send to virustotal for analyze the file whether it is malware or not.Turns out it is(eeetakuttnyaaa).
+#### After I have extract the file,I got an .exe file so i was curious so I send to virustotal for analyze the file whether it is malware or not.Turns out it is(eeetakuttnyaaa).
 
 ![virustotal](Screenshots/virustotal.png)
 
-so like a real malware analysis,i try to use DIE to analyze the file to detect what kind of language it use to compile.
+#### so like a real malware analysis,i try to use DIE to analyze the file to detect what kind of language it use to compile.
 
 ![DIE analyze](Screenshots/DIEanalyze.png)
 
-Then i curious what the malware do if we execute it,so i try to run it and it gave me 3 file .txt.enc.So my job right is to try to get to the source code and try to decode it by reverse engineering it.
+#### Then i curious what the malware do if we execute it,so i try to run it and it gave me 3 file .txt.enc.So my job right is to try to get to the source code and try to decode it by reverse engineering it.
 
 ![run file](Screenshots/exerun.png)
 
-
-To decompile to python I need to use pyinsxtractor-ng(oh dont forget to download python in the machine)
+### ✅ Step 2: Extract File And Set Up Python Environment
+To decompile to python I need to use pyinsxtractor-ng(oh dont forget to download python and pyinsxtractor(github) in the machine).
 
 ![extract using pyinsxtractor](Screenshots/pyinsxtractor.png)
 
-After extract the file using pyinsxtractor,I list it in powershell to find suspicious file to see and i found simulated_ransomware.pyc the most interesting
+#### After extract the file using pyinsxtractor,I list it in powershell to find suspicious file to see and i found simulated_ransomware.pyc the most interesting
 ```Powershell
  Directory: C:\Users\haiqal\Downloads\practical test 2\simulated_ransomware.exe_extracted
 Mode                 LastWriteTime         Length Name
@@ -119,15 +107,15 @@ d-----         5/24/2025  11:08 AM                setuptools
 -a----         5/24/2025  11:08 AM         117832 _ssl.pyd
 ```
 
-But when i try to open the file it cant be read by vscode.Then i realise I need to convert .pyc to .py to make it readable
+#### But when i try to open the file it cant be read by vscode.Then i realise I need to convert .pyc to .py to make it readable
 
 ![pyc file](Screenshots/pycfile.png)
 
-So to convert it to .py i need to use uncompyle6 but i encountered an error
+#### So to convert it to .py i need to use uncompyle6 but i encountered an error
 
 ![error](<Screenshots/uncompyle error.png>)
 
-it says i need to run it in python environment that i have setup(silly me).Why i need to run it in evironment because the uncompyle6 support only python 3.8.0 but right now by default im running in python 3.13.0.That's why in short i have to use python environment for this particular path/folder.But i will show how to create python environment for future reference.
+#### it says i need to run it in python environment that i have setup(silly me).Why i need to run it in evironment because the uncompyle6 support only python 3.8.0 but right now by default im running in python 3.13.0.That's why in short i have to use python environment for this particular path/folder.But i will show how to create python environment for future reference.
  
 ```powershell
  PS C:\Users\haiqal\Downloads\practical test 2> py -3.8-32 -m venv venv38
@@ -142,9 +130,9 @@ At line:1 char:1
     + FullyQualifiedErrorId : UnauthorizedAccess
 ```
 
-seems like i have error when try to activate it,so the trick to bypass this to write the command below and we are in the environment to install the uncomyle6.
+#### seems like i have error when try to activate it,so the trick to bypass this to write the command below and we are in the environment to install the uncompyle6.
 ```Powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned #This PowerShell cmdlet changes the execution policy, which controls what scripts are allowed to run in PowerShell.
 .\venv38\Scripts\Activate.ps1
  pip install uncompyle6
 ```
@@ -152,32 +140,37 @@ the output kinda like this:
 
 ![python environment](<Screenshots/output environment.png>)
 
-then I uncompyle it and open it in vscode.
+#### then I uncompyle it and open it in vscode.
 ```powershell
 (venv38) PS C:\Users\haiqal\Downloads\practical test 2\simulated_ransomware.exe_extracted> uncompyle6 -o . .\simulated_ransomware.pyc
 .\simulated_ransomware.pyc --
 # Successfully decompiled file
 ```
 
-Another note for me(Please turn off every defender).Then I open it and found it is hardcoded the text but i want to try to decrypt the file that it gave me in .enc so i try to reverse engineer this code to write a script to decode 3 files that have been encoded in .txt.enc.(i cant paste the code here,the git will detect it as malware).
+#### Another note for me:
+#### Please turn off Windows Defender completely.
+
+#### When I opened the file, I found that the text was hardcoded. However, I want to try decrypting the .enc file it gave me. So, I attempted to reverse engineer the code to write a script that can decode three files which have been encoded with the .txt.enc extension.
+
+#### (I can't paste the code here because Git detects it as malware.)
 
 ![source code](Screenshots/malwaresourcecode.png)
 
-Based on the code what we know is:
+#### Based on the code what we know is:
 
 -It uses AES encryption in ECB mode.
 The encryption key is derived as:
 
-python
+```python
 KEY_SUFFIX = "RahsiaLagi"
 KEY_STR = f"Bukan{KEY_SUFFIX}"  # = "BukanRahsiaLagi"
 KEY = sha256(KEY_STR.encode()).digest()[:16]  # 16-byte AES key
 It uses PKCS-style padding.
-
+```
 It encrypts .txt files inside the locked_files/ folder and saves them as .enc files.
 
 
-so to decode it i write a script to decript the current .enc file  to .txt readable file.( python -m pip install pycryptodome in order to run the script)
+#### so to decode it i write a script to decript the current .enc file  to .txt readable file.( python -m pip install pycryptodome in order to run the script)
 ```python
 from Crypto.Cipher import AES
 from hashlib import sha256
@@ -212,11 +205,11 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-the output:
+#### the output:
 
 ![output python](<Screenshots/output python.png>)
 
-alrightyy for the grand revealll
+#### alrightyy for the grand revealll
 
 ![decrypted file](<Screenshots/the decrypt file.png>)
 
