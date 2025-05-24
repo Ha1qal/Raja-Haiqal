@@ -62,6 +62,7 @@ After I have extract the file,I got an .exe file so i was curious so I send to v
 ![virustotal](Screenshots/virustotal.png)
 
 so like a real malware analysis,i try to use DIE to analyze the file to detect what kind of language it use to compile.
+
 ![DIE analyze](Screenshots/DIEanalyze.png)
 
 Then i curious what the malware do if we execute it,so i try to run it and it gave me 3 file .txt.enc.So my job right is to try to get to the source code and try to decode it by reverse engineering it.
@@ -70,13 +71,12 @@ Then i curious what the malware do if we execute it,so i try to run it and it ga
 
 
 To decompile to python I need to use pyinsxtractor-ng(oh dont forget to download python in the machine)
+
 ![extract using pyinsxtractor](Screenshots/pyinsxtractor.png)
 
 After extract the file using pyinsxtractor,I list it in powershell to find suspicious file to see and i found simulated_ransomware.pyc the most interesting
-
- Directory: C:\Users\haiqal\Downloads\practical test 2\simulated_ransomware.exe_extracted
-
 ```Powershell
+ Directory: C:\Users\haiqal\Downloads\practical test 2\simulated_ransomware.exe_extracted
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----         5/24/2025  11:08 AM                Crypto
@@ -120,14 +120,16 @@ d-----         5/24/2025  11:08 AM                setuptools
 ```
 
 But when i try to open the file it cant be read by vscode.Then i realise I need to convert .pyc to .py to make it readable
+
 ![pyc file](Screenshots/pycfile.png)
 
 So to convert it to .py i need to use uncompyle6 but i encountered an error
+
 ![error](<Screenshots/uncompyle error.png>)
 
-it says i need to run it in python environment that i have setup(silly me).Why i need to run it in evironment because the uncompye6 support only python 3.8.0 but right now by default im running in python 3.13.0.That's why in short i have to use python environment for this particular path/folder.But i will show hot to create python environment for future reference.
+it says i need to run it in python environment that i have setup(silly me).Why i need to run it in evironment because the uncompyle6 support only python 3.8.0 but right now by default im running in python 3.13.0.That's why in short i have to use python environment for this particular path/folder.But i will show how to create python environment for future reference.
  
-powershell
+```powershell
  PS C:\Users\haiqal\Downloads\practical test 2> py -3.8-32 -m venv venv38
 PS C:\Users\haiqal\Downloads\practical test 2> .\venv38\Scripts\Activate.ps1
 .\venv38\Scripts\Activate.ps1 : File C:\Users\haiqal\Downloads\practical test 2\venv38\Scripts\Activate.ps1 cannot be
@@ -138,6 +140,7 @@ At line:1 char:1
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : SecurityError: (:) [], PSSecurityException
     + FullyQualifiedErrorId : UnauthorizedAccess
+```
 
 seems like i have error when try to activate it,so the trick to bypass this to write the command below and we are in the environment to install the uncomyle6.
 ```Powershell
@@ -156,8 +159,9 @@ then I uncompyle it and open it in vscode.
 # Successfully decompiled file
 ```
 
-Another note for me(Please turn off every defender).Then I open it and found it is hardcoded the text but i want to try to decrypt the file that it gave me in .enc so i try to reverse engineer this code to write a script to decode 3 files that have been encoded in .txt.enc.
+Another note for me(Please turn off every defender).Then I open it and found it is hardcoded the text but i want to try to decrypt the file that it gave me in .enc so i try to reverse engineer this code to write a script to decode 3 files that have been encoded in .txt.enc.(i cant paste the code here,the git will detect it as malware).
 
+![source code](Screenshots/malwaresourcecode.png)
 
 Based on the code what we know is:
 
@@ -209,9 +213,11 @@ if __name__ == "__main__":
     main()
 ```
 the output:
+
 ![output python](<Screenshots/output python.png>)
 
 alrightyy for the grand revealll
+
 ![decrypted file](<Screenshots/the decrypt file.png>)
 
 

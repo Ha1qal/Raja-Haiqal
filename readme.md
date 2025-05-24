@@ -21,3 +21,4 @@ This repository includes:
   
 🧪 **Practical test** 
 - [Practical Test 1](<Cryptography-Class/Assessments/Practical Test/Practical test 1.md>)
+- [practical Test 2](<Cryptography-Class/Assessments/Practical Test/Practical test 2/Practical test 2.md>)
