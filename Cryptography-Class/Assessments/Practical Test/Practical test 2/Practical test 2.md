@@ -49,7 +49,7 @@ This project simulates a **ransomware reverse engineering challenge**. The main 
 
 ![virustotal](Screenshots/virustotal.png)
 
-#### so like a real malware analysis,i try to use DIE to analyze the file to detect what kind of language it use to compile.
+#### so like a real malware analysis,i try to use DIE to analyze the file to detect what kind of language it used.Boom python language.
 
 ![DIE analyze](Screenshots/DIEanalyze.png)
 
